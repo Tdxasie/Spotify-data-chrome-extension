@@ -1,0 +1,20 @@
+{
+   "browser_action": {
+      "default_icon": "icon.png",
+      "default_popup": "popup/popup.html"
+   },
+   "description": "Music Data",
+   "manifest_version": 2,
+   "name": "Get Data better",
+   "version": "2.0",
+   "permissions": [
+     "identity",
+     "*://*.spotify.com/*",
+     "storage",
+     "tabs"
+   ],
+   "background":
+   {
+     "scripts": ["background/background.js"]
+   }
+}
