@@ -92,8 +92,6 @@ function parseHTML(html){
   }
 }
 
-
-
 function truncateText(str, maxLength) {
   if (str.length > maxLength) {
     str = str.substr(0,maxLength) + '...';
