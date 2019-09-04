@@ -1,4 +1,8 @@
 
+// chrome.storage.sync.remove(['refreshToken', 'accessToken'], () => {
+//   console.log('cleared memory');
+// });
+
 const clientId = '67505c53122340ee89850bd5a20f49a7';
 const clientSecret = '2e87275818e14517bc7e91a91e7ffa3e';
 
@@ -72,12 +76,14 @@ async function getAuth() {
   let url = 'https://accounts.spotify.com/authorize';
   let redirectURI = chrome.identity.getRedirectURL() + "spotify";
   let authURL = url + '?client_id=' + clientId + '&redirect_uri=' + encodeURI(redirectURI) + "&scope=user-read-currently-playing" + "&response_type=code";
+  console.log(authURL);
   let details = {
     url: authURL,
     interactive: true
   };
   chrome.identity.launchWebAuthFlow(details, async url => {
     let code = parseURL(url);
+    console.log(code);
     await getTokens(code);
   });
 

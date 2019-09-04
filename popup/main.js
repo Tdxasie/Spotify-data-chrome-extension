@@ -1,4 +1,3 @@
-
 window.addEventListener('load', () => {
   chrome.runtime.sendMessage({msg: "spotify_token_please"});
 });
@@ -10,6 +9,7 @@ chrome.runtime.onMessage.addListener( async (request, sender, sendResponse) => {
     let info = await trackInfo(currentPlayback);
     info = await getGenre(token, info);
     console.log(info);
+    document.getElementsByClassName('trackname')
   }
 });
 

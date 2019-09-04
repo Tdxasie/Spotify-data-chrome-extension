@@ -1,4 +1,68 @@
 body{
   height: 400px;
-  width: 400px;
+  width: 600px;
+}
+
+.background{
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+  background: linear-gradient(123.36deg, #FFB930 0.38%, rgba(255, 255, 255, 0) 100%), #D81D55;
+}
+
+.grey-back{
+  position: absolute;
+  left: 11.5%;
+  right: 6.5%;
+  top: 20.5%;
+  bottom: 22.25%;
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.cover{
+  position: absolute;
+  /* width: 220px;
+  height: 220px; */
+  left: 40px;
+  top: 48px;
+}
+
+.trackname-back{
+  position: absolute;
+  left: 39.33%;
+  right: 4%;
+  top: 25.5%;
+  bottom: 63%;
+  background: #1E2457;
+}
+
+.artist-back{
+  position: absolute;
+  left: 54.83%;
+  right: 8.83%;
+  top: 35.75%;
+  bottom: 56.75%;
+  background: #FFFFFF;
+}
+
+.trackname{
+  position: absolute;
+  left: 43.33%;
+  right: 15%;
+  top: 25.5%;
+  bottom: 63.25%;
+
+  font-family: Impact;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 26px;
+  line-height: 32px;
+  display: flex;
+  align-items: center;
+
+  color: #FFFFFF;
+
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
