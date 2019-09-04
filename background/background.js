@@ -2,6 +2,8 @@
 const clientId = '67505c53122340ee89850bd5a20f49a7';
 const clientSecret = '2e87275818e14517bc7e91a91e7ffa3e';
 
+autoRefresh();
+
 chrome.runtime.onMessage.addListener( (request, sender, sendResponse) => {
   if (request.msg === "spotify_token_please") {
     chrome.storage.sync.get(['refreshToken'], async (res) => {
@@ -9,12 +11,21 @@ chrome.runtime.onMessage.addListener( (request, sender, sendResponse) => {
         console.log('auth')
         await getAuth();
       } else {
-        console.log('refresh')
-        await refreshToken();
+        chrome.storage.sync.get(['accessToken'], memCell => {
+          chrome.runtime.sendMessage({
+            msg: "your_spotify_token_thx",
+            token: memCell.accessToken
+          });
+        });
       }
     });
   }
 });
+
+async function autoRefresh() {
+  await refreshToken();
+  setInterval( async () => {await refreshToken()}, 3400*1000)
+}
 
 async function refreshToken() {
   chrome.storage.sync.get(['refreshToken'], async (val) => {
@@ -28,10 +39,11 @@ async function refreshToken() {
       }
     });
     let msg = await res.json();
-    chrome.runtime.sendMessage({
-      msg: "your_spotify_token_thx",
-      token: msg.access_token
+    chrome.storage.sync.set({
+      accessToken: msg.access_token
     });
+
+    console.log('refreshed');
   });
 }
 
