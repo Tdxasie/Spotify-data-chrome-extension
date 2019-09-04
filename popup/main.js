@@ -11,6 +11,7 @@ chrome.runtime.onMessage.addListener( async (request, sender, sendResponse) => {
     console.log(info);
     document.getElementById('cover').src = info.images[1].url;
     document.getElementById('trck').innerHTML = info.track.name;
+    document.getElementById('artst').innerHTML = info.artist.name;
   }
 });
 
