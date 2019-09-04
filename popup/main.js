@@ -91,3 +91,12 @@ function parseHTML(html){
     return [];
   }
 }
+
+
+
+function truncateText(str, maxLength) {
+  if (str.length > maxLength) {
+    str = str.substr(0,maxLength) + '...';
+  }
+  return str;
+}
