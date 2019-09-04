@@ -9,7 +9,8 @@ chrome.runtime.onMessage.addListener( async (request, sender, sendResponse) => {
     let info = await trackInfo(currentPlayback);
     info = await getGenre(token, info);
     console.log(info);
-    document.getElementsByClassName('trackname')
+    document.getElementById('cover').src = info.images[1].url;
+    document.getElementById('trck').innerHTML = info.track.name;
   }
 });
 
