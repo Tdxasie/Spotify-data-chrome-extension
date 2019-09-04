@@ -90,6 +90,7 @@ async function getAuth() {
 }
 
 function parseURL(url) {
+  if(url == undefined) return undefined;
   let code = url.split('=')[1].split('&')[0];
   return code;
 }

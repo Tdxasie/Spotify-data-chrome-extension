@@ -9,7 +9,7 @@ chrome.runtime.onMessage.addListener( async (request, sender, sendResponse) => {
     let info = await trackInfo(currentPlayback);
     info = await getGenre(token, info);
     console.log(info);
-    document.getElementsByClassName('trackname')
+    document.getElementById('trck').innerHTML = truncateText(info.track.name, 30);
   }
 });
 
@@ -88,4 +88,13 @@ function parseHTML(html){
   } else {
     return [];
   }
+}
+
+
+
+function truncateText(str, maxLength) {
+  if (str.length > maxLength) {
+    str = str.substr(0,maxLength) + '...';
+  }
+  return str;
 }
