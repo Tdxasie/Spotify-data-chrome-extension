@@ -23,8 +23,12 @@ chrome.runtime.onMessage.addListener( (request, sender, sendResponse) => {
 });
 
 async function autoRefresh() {
-  await refreshToken();
-  setInterval( async () => {await refreshToken()}, 3400*1000)
+  chrome.storage.sync.get(['refreshToken'], async (res) => {
+    if ('refreshToken' in res) {
+      await refreshToken();
+      setInterval( async () => {await refreshToken()}, 3400*1000);
+    }
+  });
 }
 
 async function refreshToken() {
