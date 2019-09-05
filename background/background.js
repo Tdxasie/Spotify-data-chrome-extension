@@ -15,12 +15,12 @@ chrome.runtime.onMessage.addListener( (request, sender, sendResponse) => {
         console.log('auth')
         await getAuth();
       } else {
-        chrome.storage.sync.get(['accessToken'], memCell => {
+        chrome.storage.sync.get(['accessToken'], res => {
           console.log('sent token')
-          console.log(memCell.accessToken)
+          console.log(res.accessToken)
           chrome.runtime.sendMessage({
             msg: "your_spotify_token_thx",
-            token: memCell.accessToken
+            token: res.accessToken
           });
         });
       }
@@ -32,7 +32,7 @@ async function autoRefresh() {
   chrome.storage.sync.get(['refreshToken'], async (res) => {
     if ('refreshToken' in res) {
       await refreshToken();
-      setInterval( async () => {await refreshToken()}, 3400*1000);
+      setInterval( async () => {await refreshToken()}, 10000);
     }
   });
 }
