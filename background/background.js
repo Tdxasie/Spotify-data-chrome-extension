@@ -16,6 +16,8 @@ chrome.runtime.onMessage.addListener( (request, sender, sendResponse) => {
         await getAuth();
       } else {
         chrome.storage.sync.get(['accessToken'], memCell => {
+          console.log('sent token')
+          console.log(memCell.accessToken)
           chrome.runtime.sendMessage({
             msg: "your_spotify_token_thx",
             token: memCell.accessToken

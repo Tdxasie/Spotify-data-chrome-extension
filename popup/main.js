@@ -11,11 +11,14 @@ chrome.runtime.onMessage.addListener( async (request, sender, sendResponse) => {
     console.log(info);
     document.getElementById('cover').src = info.images[1].url;
     document.getElementById('trck').innerHTML = truncateText(info.track.name, 24) ;
+    document.getElementById('trck').innerHTML = info.track.name;
     document.getElementById('artst').innerHTML = info.artist.name;
+    document.getElementById('gnr').innerHTML = info.genres.join(', ');
   }
 });
 
 async function getPlayBack(token) {
+  console.log(token);
   let url = "https://api.spotify.com/v1/me/player/currently-playing";
   let res = await fetch(url, {headers: {'Authorization' : 'Bearer ' + token}});
   let currentPlayback = await res.json();
@@ -97,4 +100,8 @@ function truncateText(str, maxLength) {
     str = str.substr(0,maxLength) + '...';
   }
   return str;
+}
+
+function formatGenres(list){
+
 }

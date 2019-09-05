@@ -14,10 +14,10 @@ body{
 
 .grey-back{
   position: absolute;
-  left: 11.5%;
-  right: 6.5%;
-  top: 20.5%;
-  bottom: 22.25%;
+  left: 7.83%;
+  right: 7.83%;
+  top: 7.5%;
+  bottom: 37.25%;
   background: rgba(0, 0, 0, 0.08);
 }
 
@@ -25,16 +25,16 @@ body{
   position: absolute;
   /* width: 220px;
   height: 220px; */
-  left: 40px;
-  top: 48px;
+  left: 16px;
+  top: 11px;
 }
 
 .trackname-back{
   position: absolute;
-  left: 39.33%;
-  right: 4%;
-  top: 25.5%;
-  bottom: 63%;
+  left: 34.5%;
+  right: 4.33%;
+  top: 11.25%;
+  bottom: 77.25%;
 
   display: flex;
   align-items: center;
@@ -57,10 +57,10 @@ body{
 
 .artist-back{
   position: absolute;
-  left: 54.83%;
-  right: 8.83%;
-  top: 35.75%;
-  bottom: 56.75%;
+  left: 53.83%;
+  right: 9.83%;
+  top: 20.75%;
+  bottom: 71.75%;
 
   display: flex;
   align-items: center;
@@ -79,5 +79,44 @@ body{
   align-items: center;
   text-align: center;
 
+  overflow:hidden;
+
   color: #1E2457;
+}
+
+.genres-back{
+  position: absolute;
+  left: 38.33%;
+  right: 13.83%;
+  top: 26.75%;
+  bottom: 63.5%;
+
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  padding-left: 10px;
+
+  background: rgba(0, 0, 0, 0.08);
+
+}
+
+.genre-text-zone{
+  width:240px;
+  height:20px;
+  line-height: 20px;
+  overflow: hidden;
+}
+
+.genres{
+
+  font-family: Impact;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 19px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  color: #FFFFFF;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
 }
