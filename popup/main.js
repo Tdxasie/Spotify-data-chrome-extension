@@ -10,8 +10,8 @@ chrome.runtime.onMessage.addListener( async (request, sender, sendResponse) => {
     info = await getGenre(token, info);
     console.log(info);
     document.getElementById('cover').src = info.images[1].url;
-    document.getElementById('trck').innerHTML = truncateText(info.track.name, 24) ;
     document.getElementById('trck').innerHTML = info.track.name;
+    animateTrackname(info.track.name);
     document.getElementById('artst').innerHTML = info.artist.name;
     document.getElementById('gnr').innerHTML = info.genres.join(', ');
   }
@@ -34,6 +34,7 @@ async function getGenre(token, info) {
 }
 
 async function trackInfo(currentPlayback){
+  console.log(currentPlayback.item.artists);
   let track = currentPlayback.item.name;
   let artist = currentPlayback.item.artists[0].name;
   let samples = await getSamples(artist, track);
@@ -95,13 +96,39 @@ function parseHTML(html){
   }
 }
 
-function truncateText(str, maxLength) {
-  if (str.length > maxLength) {
-    str = str.substr(0,maxLength) + '...';
+function animateTrackname(trackname){
+  if (trackname.length > 24){
+    document.body.style.setProperty("--playTrackName", "running");
+    document.body.style.setProperty("--trackPadding", "100%");
+    console.log('overflowed');
   }
-  return str;
 }
 
-function formatGenres(list){
 
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//love
