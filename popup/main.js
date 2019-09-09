@@ -1,28 +1,39 @@
 window.addEventListener('load', () => {
   chrome.runtime.sendMessage({msg: "spotify_token_please"});
+  document.getElementById('track-main-info').style.display = 'none';
 });
 
 chrome.runtime.onMessage.addListener( async (request, sender, sendResponse) => {
   if (request.msg === "your_spotify_token_thx"){
     let token = request.token;
     let currentPlayback = await getPlayBack(token);
-    let info = await trackInfo(currentPlayback);
-    info = await getGenre(token, info);
-    console.log(info);
-    document.getElementById('cover').src = info.images[1].url;
-    document.getElementById('trck').innerHTML = info.track.name;
-    animateTrackname(info.track.name);
-    document.getElementById('artst').innerHTML = info.artist.name;
-    document.getElementById('gnr').innerHTML = info.genres.join(', ');
+    if (currentPlayback){
+      let info = await trackInfo(currentPlayback);
+      info = await getGenre(token, info);
+      console.log(info);
+      document.getElementById('cover').src = info.images[1].url;
+      document.getElementById('cover').onclick = () => chrome.tabs.create({url: info.google_link});
+      document.getElementById('trck').innerHTML = info.track.name;
+      document.getElementById('artst').innerHTML = info.artist.name;
+      document.getElementById('gnr').innerHTML = formatGenres(info.genres);
+      document.getElementById('track-main-info').style.display = 'block';
+      animateTrackname(info.track.name);
+    } else {
+      console.log('currently not playing music on spotify');
+    }
   }
 });
 
 async function getPlayBack(token) {
-  console.log(token);
   let url = "https://api.spotify.com/v1/me/player/currently-playing";
   let res = await fetch(url, {headers: {'Authorization' : 'Bearer ' + token}});
-  let currentPlayback = await res.json();
-  return currentPlayback;
+  if (res.status == 204) {
+    return undefined;
+  } else {
+    let currentPlayback = await res.json();
+    console.log(currentPlayback);
+    return currentPlayback;
+  }
 }
 
 async function getGenre(token, info) {
@@ -34,7 +45,6 @@ async function getGenre(token, info) {
 }
 
 async function trackInfo(currentPlayback){
-  console.log(currentPlayback.item.artists);
   let track = currentPlayback.item.name;
   let artist = currentPlayback.item.artists[0].name;
   let samples = await getSamples(artist, track);
@@ -97,11 +107,14 @@ function parseHTML(html){
 }
 
 function animateTrackname(trackname){
-  if (trackname.length > 24){
+  if (document.getElementById('trck').offsetWidth > 356){
     document.body.style.setProperty("--playTrackName", "running");
     document.body.style.setProperty("--trackPadding", "100%");
-    console.log('overflowed');
   }
+}
+
+function formatGenres(genres){
+  return genres.map( genre => genre[0].toUpperCase() + genre.slice(1)).join(', ');
 }
 
 

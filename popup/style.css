@@ -25,10 +25,9 @@ body{
 
 .cover{
   position: absolute;
-  /* width: 220px;
-  height: 220px; */
   left: 16px;
   top: 11px;
+  cursor: pointer;
 }
 
 .trackname{
@@ -145,4 +144,64 @@ body{
   top: 11.25%;
 
   background: linear-gradient(270deg, #FFFFFF -6.9%, rgba(30, 36, 87, 0.56) -6.89%, #1E2457 36.84%);
-  transform: rotate(180deg);}
+  transform: rotate(180deg);
+}
+
+.day {
+  position: absolute;
+  width: 100px;
+  height: 29px;
+  left: 272px;
+  top: 157px;
+
+  font-family: Advent Pro;
+  font-style: normal;
+  font-weight: 200;
+  font-size: 43px;
+  line-height: 51px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  color: #1E2457;
+}
+
+.month {
+  position: absolute;
+  width: 147px;
+  height: 46px;
+  left: 236px;
+  top: 185px;
+  display: flex;
+  align-items: center;
+
+}
+
+.month p {
+  width: 147px;
+  font-family: Advent Pro;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 8vw;
+  line-height: 77px;
+  text-align: center;
+  color: #1E2457;
+}
+
+.year {
+  position: absolute;
+  width: 170px;
+  height: 75px;
+  left: 383px;
+  top: 157px;
+
+  font-family: Advent Pro;
+  font-style: normal;
+  font-weight: 200;
+  font-size: 100px;
+  line-height: 120px;
+  display: flex;
+  align-items: center;
+
+  color: #1E2457;
+}
