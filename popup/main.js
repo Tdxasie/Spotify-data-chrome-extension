@@ -31,7 +31,6 @@ async function getPlayBack(token) {
     return undefined;
   } else {
     let currentPlayback = await res.json();
-    console.log(currentPlayback);
     return currentPlayback;
   }
 }
@@ -115,6 +114,10 @@ function animateTrackname(trackname){
 
 function formatGenres(genres){
   return genres.map( genre => genre[0].toUpperCase() + genre.slice(1)).join(', ');
+}
+
+function formatDate(release_date){
+
 }
 
 

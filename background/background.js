@@ -1,7 +1,7 @@
 
-// chrome.storage.sync.remove(['refreshToken', 'accessToken'], () => {
-//   console.log('cleared memory');
-// });
+chrome.storage.sync.remove(['refreshToken', 'accessToken'], () => {
+  console.log('cleared memory');
+});
 
 const clientId = '67505c53122340ee89850bd5a20f49a7';
 const clientSecret = '2e87275818e14517bc7e91a91e7ffa3e';
@@ -10,17 +10,17 @@ autoRefresh();
 
 chrome.runtime.onMessage.addListener( (request, sender, sendResponse) => {
   if (request.msg === "spotify_token_please") {
-    chrome.storage.sync.get(['refreshToken'], async (res) => {
-      if (!('refreshToken' in res)) {
+    chrome.storage.sync.get(['refreshToken2'], async (res) => {
+      if (!('refreshToken2' in res)) {
         console.log('auth')
         await getAuth();
       } else {
-        chrome.storage.sync.get(['accessToken'], res => {
+        chrome.storage.sync.get(['accessToken2'], res => {
           console.log('sent token')
-          console.log(res.accessToken)
+          console.log(res.accessToken2)
           chrome.runtime.sendMessage({
             msg: "your_spotify_token_thx",
-            token: res.accessToken
+            token: res.accessToken2
           });
         });
       }
@@ -29,8 +29,8 @@ chrome.runtime.onMessage.addListener( (request, sender, sendResponse) => {
 });
 
 async function autoRefresh() {
-  chrome.storage.sync.get(['refreshToken'], async (res) => {
-    if ('refreshToken' in res) {
+  chrome.storage.sync.get(['refreshToken2'], async (res) => {
+    if ('refreshToken2' in res) {
       await refreshToken();
       setInterval( async () => {await refreshToken()}, 10000);
     }
@@ -38,9 +38,9 @@ async function autoRefresh() {
 }
 
 async function refreshToken() {
-  chrome.storage.sync.get(['refreshToken'], async (val) => {
+  chrome.storage.sync.get(['refreshToken2'], async (val) => {
     let url = 'https://accounts.spotify.com/api/token';
-    let authURL = url + '?grant_type=refresh_token' + '&refresh_token=' + val.refreshToken;
+    let authURL = url + '?grant_type=refresh_token' + '&refresh_token=' + val.refreshToken2;
     let res = await fetch(authURL, {
       method: 'POST',
       headers: {
@@ -50,7 +50,7 @@ async function refreshToken() {
     });
     let msg = await res.json();
     chrome.storage.sync.set({
-      accessToken: msg.access_token
+      accessToken2: msg.access_token
     });
 
     console.log('refreshed');
@@ -70,11 +70,12 @@ async function getTokens(code) {
   });
   let msg = await res.json();
   chrome.storage.sync.set({
-    refreshToken: msg.refresh_token
+    refreshToken2: msg.refresh_token
   });
 }
 
 async function getAuth() {
+  console.log('get auth');
   let url = 'https://accounts.spotify.com/authorize';
   let redirectURI = chrome.identity.getRedirectURL() + "spotify";
   let authURL = url + '?client_id=' + clientId + '&redirect_uri=' + encodeURI(redirectURI) + "&scope=user-read-currently-playing" + "&response_type=code";
