@@ -1,4 +1,4 @@
-# spotify_data_scrapper_advanced_oauth
+# Spotify Data Chrome extension
  
 Displays track name, artist name, genre, date, possible samples
 
